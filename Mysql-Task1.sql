@@ -124,12 +124,13 @@ CREATE TABLE Parcel (
     status ENUM('Packed', 'Shipped', 'Out for Delivery', 'Delivered') DEFAULT 'Packed',
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE
 );
-Insert into parcel(order_id,weight,dimensions,description,status)values
+INSERT INTO Parcel(order_id, weight, dimensions, description, status) VALUES
 (6, 2.5, '10x5x8', 'Electronics', 'Shipped'),
 (7, 1.2, '8x4x6', 'Clothing', 'Delivered'),
 (8, 5.0, '15x10x12', 'Books', 'Packed'),
-(9, 0.8, '5x3x4', 'Accessories', 'Cancelled'),
+(9, 0.8, '5x3x4', 'Accessories', 'Packed'), 
 (10, 3.6, '12x8x10', 'Shoes', 'Shipped');
+
 
 
 
