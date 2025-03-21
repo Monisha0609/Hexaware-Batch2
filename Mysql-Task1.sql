@@ -18,6 +18,14 @@ INSERT INTO customer (cust_name, email, phone, address) VALUES
 INSERT INTO customer (Cust_id,cust_name, email, phone, address) VALUES
 (5,'Jansi','jansi@gmail.com', '9003455502', '4 10th East Main Road, City C');
 
+alter table customer add column type enum('sender', 'receiver')Default Null;
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE customer SET type = 'Receiver' WHERE cust_name IN ('Monisha', 'Sam');
+UPDATE customer SET type = 'Sender' WHERE type IS NULL;
+
+SET SQL_SAFE_UPDATES = 1;  
+
 
 -- Courier Table (Delivery personnel)
 CREATE TABLE Courier (
@@ -36,6 +44,53 @@ Insert into Courier(person_name,phone,vehicle_number,status)values
 ('Angel', '8888888004', 'DL 08 GH 3456', 'Inactive'),
 ('Akash', '8888888005', 'WB 10 IJ 7890', 'Available');
 
+alter table courier add column  servicetype enum('Same-Day Delivery',
+'Next-Day Delivery',
+'Standard Shipping',
+'Express Delivery',
+'International Shipping',
+'Local Delivery')Default Null;
+
+Update courier 
+Set servicetype = 
+    Case 
+        When courier_id = 1 Then 'Express Delivery'
+        When courier_id = 2 Then 'Same-Day Delivery'
+        When courier_id = 3 Then 'Next-Day Delivery'
+        When courier_id = 4 Then 'Standard Shipping'
+        When courier_id = 5 Then 'Next-Day Delivery'
+        When courier_id = 6 Then 'Local Delivery'
+        When courier_id = 7 Then 'International Shipping'
+        When courier_id = 8 Then 'Local Delivery'
+    End
+Where courier_id Between 1 and 8;
+
+
+Alter Table Courier Add Column service_cost int DEFAULT NULL;
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE Courier 
+SET service_cost = CASE
+    WHEN servicetype = 'Express Delivery' THEN 800
+    WHEN servicetype = 'Same-Day Delivery' THEN 1000
+    WHEN servicetype = 'Next-Day Delivery' THEN 500
+    WHEN servicetype = 'Standard Shipping' THEN 450  -- Fixed name
+    WHEN servicetype = 'Local Delivery' THEN 400
+    WHEN servicetype = 'International Shipping' THEN 2000  -- Fixed name
+    ELSE NULL
+END
+WHERE servicetype IS NOT NULL;
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+
+
+
+
+
+
 -- Employee Table (Office Staff)
 CREATE TABLE Employee (
     emp_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,6 +107,20 @@ Insert into employee(emp_name,email,phone,role)values
 ('Clark', 'clark@example.com', '7777777003', 'Support'),
 ('Diana', 'diana@example.com', '7777777004', 'Manager'),
 ('Tony', 'tony@example.com', '7777777005', 'Dispatcher');
+
+Alter Table employee Add Column emp_salary int DEFAULT NULL;
+
+Set sql_safe_updates =0;
+
+update employee
+set emp_salary =case
+when role='Manager' then 50000
+when role='Dispatcher'then 30000
+when role='support'then 25000
+else null
+end;
+
+set sql_safe_updates=1;
 
 -- Location Table (Warehouses or Hubs)
 CREATE TABLE Location (
@@ -124,12 +193,16 @@ CREATE TABLE Parcel (
     status ENUM('Packed', 'Shipped', 'Out for Delivery', 'Delivered') DEFAULT 'Packed',
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE
 );
-INSERT INTO Parcel(order_id, weight, dimensions, description, status) VALUES
+Insert into parcel(order_id,weight,dimensions,description,status)values
 (6, 2.5, '10x5x8', 'Electronics', 'Shipped'),
 (7, 1.2, '8x4x6', 'Clothing', 'Delivered'),
 (8, 5.0, '15x10x12', 'Books', 'Packed'),
-(9, 0.8, '5x3x4', 'Accessories', 'Packed'), 
+(9, 0.8, '5x3x4', 'Accessories', 'Cancelled'),
 (10, 3.6, '12x8x10', 'Shoes', 'Shipped');
+
+
+
+
 
 
 
