@@ -16,7 +16,7 @@ public class CashDonation extends Donation {
 
     @Override
     public void recordDonation() {
-        System.out.println("Cash donation of $" + getAmount() + " by " + getDonorName() + " on " + donationTime);
+        System.out.println("Cash donation of Rs." + getAmount() + " by " + getDonorName() + " on " + donationTime);
     }
 }
 
