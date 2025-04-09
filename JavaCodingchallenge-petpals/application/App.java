@@ -5,7 +5,7 @@ import shelter.*;
 import donation.*;
 import db.*;
 import exception.*;
-
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
@@ -16,6 +16,25 @@ public class App {
         PetShelter shelter = new PetShelter();
         Scanner sc = new Scanner(System.in);
 
+        try (Connection conn = DBConnection.getConnection()) {
+
+            // 1. Display Pet Listings
+            System.out.println("Available Pets for Adoption:");
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Pets");
+
+          
+            while (rs.next()) {
+                int petId = rs.getInt("PetID");
+                String petName = rs.getString("Name");
+                int petAge = rs.getInt("Age");
+                String breed = rs.getString("Breed");
+                String type = rs.getString("Type");
+
+                System.out.println("Pet ID: " + petId + ", Name: " + petName +
+                        ", Age: " + petAge + ", Breed: " + breed + ", Type: " + type);
+            }
+        
         // Add pet with validation
         System.out.println("Enter pet type (Dog/Cat): ");
         String type = sc.nextLine();
@@ -74,6 +93,31 @@ public class App {
 
         System.out.println("Donation recorded successfully.");
 
+
+         // 3. Adoption Event Registration
+        System.out.println("\nUpcoming Adoption Events:");
+        ResultSet eventRs = stmt.executeQuery("SELECT * FROM AdoptionEvents");
+        while (eventRs.next()) {
+            System.out.println("Event ID: " + eventRs.getInt("EventID") +
+                    ", Name: " + eventRs.getString("EventName") +
+                    ", Date: " + eventRs.getDate("EventDate"));
+        }
+
+        System.out.print("Enter Event ID to register for: ");
+        int eventId = sc.nextInt();
+        sc.nextLine(); 
+        System.out.print("Enter your name to register: ");
+        String participantName = sc.nextLine();
+
+        PreparedStatement partStmt = conn.prepareStatement(
+            "INSERT INTO Participants (ParticipantName, EventID) VALUES (?, ?)"
+        );
+        partStmt.setString(1, participantName);
+        partStmt.setInt(2, eventId);
+        partStmt.executeUpdate();
+        System.out.println("Successfully registered for the event!");
+
+            
         conn.close();
         sc.close();
     }
