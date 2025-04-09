@@ -1,1 +1,31 @@
+//1. Write a program that checks whether a given order is delivered or not based on its status (e.g., "Processing," "Delivered," "Cancelled"). Use if-else statements for this.
+package com.hexaware;
+import java.util.Scanner;
+
+public class Task1 {
+
+	public static void main(String[] args) {
+	 
+     Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the order status (Pending, In Transit, Delivered, Cancelled): ");
+        String orderStatus = scanner.nextLine().trim();
+        
+        if (orderStatus.equals("Delivered")) {
+            System.out.println("The order has been delivered.");
+        } else if (orderStatus.equals("Pending")) {
+            System.out.println("The order is still pending.");
+        } else if (orderStatus.equals("In Transit")) {
+            System.out.println("The order is currently in transit.");
+        } else if (orderStatus.equals("Cancelled")) {
+            System.out.println("The order has been cancelled.");
+        } else {
+            System.out.println("Invalid order status entered.");
+        }
+        
+        scanner.close();
+
+	}
+
+}
 
