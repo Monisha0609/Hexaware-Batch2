@@ -17,13 +17,13 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         // Add pet with validation
-        System.out.print("Enter pet type (Dog/Cat): ");
-        String type = sc.next();
+        System.out.println("Enter pet type (Dog/Cat): ");
+        String type = sc.nextLine();
 
-        System.out.print("Enter pet name: ");
-        String name = sc.next();
+        System.out.println("Enter pet name: ");
+        String name = sc.nextLine();
 
-        System.out.print("Enter pet age: ");
+        System.out.println("Enter pet age: ");
         int age = sc.nextInt();
         if (age <= 0) throw new InvalidPetAgeException("Age must be a positive number.");
 
