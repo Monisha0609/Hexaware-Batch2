@@ -1,5 +1,4 @@
 package entity;
-
 public class Cat extends Pet {
     private String catColor;
 
@@ -8,16 +7,13 @@ public class Cat extends Pet {
         this.catColor = catColor;
     }
 
-    public String getCatColor(){
-    	return catColor;
-    }
-    public void setCatColor(String catColor){ 
-    	this.catColor = catColor;
-    	}
+    public String getCatColor() { return catColor; }
+    public void setCatColor(String catColor) { this.catColor = catColor; }
 
     @Override
     public String toString() {
         return super.toString() + ", CatColor='" + catColor + '\'';
     }
 }
+
 
