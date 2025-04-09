@@ -57,7 +57,7 @@ public class App {
         double amount = sc.nextDouble();
 
         if (amount < 10) {
-            throw new InsufficientFundsException("Minimum donation is $10.");
+            throw new InsufficientFundsException("Minimum donation is Rs.10.");
         }
 
         CashDonation cd = new CashDonation(donorName, amount, LocalDateTime.now());
