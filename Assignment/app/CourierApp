@@ -1,0 +1,61 @@
+package app;
+
+import dao.CourierServiceDb;
+import entity.customer;
+import Services.CourierService;
+
+import java.util.Scanner;
+
+public class CourierApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        CourierService service = new CourierServiceDb();
+
+        while (true) {
+            System.out.println("\n=== Courier Management System ===");
+            System.out.println("1. Add Customer");
+            System.out.println("2. View Customer by ID");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Email: ");
+                    String email = sc.nextLine();
+                    System.out.print("Enter Phone: ");
+                    String phone = sc.nextLine();
+                    System.out.print("Enter Address: ");
+                    String address = sc.nextLine();
+
+                    customer c = new customer(name, email, phone, address);
+                    service.addCustomer(c);
+                    System.out.println("Customer added!");
+                    break;
+
+                case 2:
+                    System.out.print("Enter Customer ID: ");
+                    int id = sc.nextInt();
+                    customer result = service.getCustomerById(id);
+                    if (result != null) {
+                        System.out.println(" Customer Found:");
+                        System.out.println(result);
+                    } else {
+                        System.out.println(" Not found.");
+                    }
+                    break;
+
+                case 0:
+                    System.out.println(" Exiting...");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println(" Invalid choice.");
+            }
+        }
+    }
+}
