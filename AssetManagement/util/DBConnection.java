@@ -15,7 +15,7 @@ public class DBConnection {
             return connection;
 
         try {
-            // Use absolute path as you mentioned:
+           
             FileInputStream fis = new FileInputStream("C:\\Users\\ELCOT\\Desktop\\Monisha\\java\\Java Task\\CaseStudy\\src\\db.properties");
             Properties prop = new Properties();
             prop.load(fis);
