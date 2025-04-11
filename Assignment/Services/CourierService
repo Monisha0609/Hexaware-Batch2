@@ -1,0 +1,41 @@
+package Services;
+
+import entity.*;
+
+public interface CourierService {
+
+    // Customer-related
+    void addCustomer(customer customer);
+    customer getCustomerById(int custId);
+    
+    // Courier-related
+    void addCourier(Courier courier);
+    Courier getCourierById(int courierId);
+
+    // Employee-related
+    void addEmployee(Employee employee);
+    Employee getEmployeeById(int empId);
+
+    // Location
+    void addLocation(Location location);
+    Location getLocationById(int locationId);
+
+    // Payment
+    void addPayment(Payment payment);
+    Payment getPaymentById(int paymentId);
+
+    // Order
+    void addOrder(Orders order);
+    Orders getOrderById(int orderId);
+
+    // Parcel
+    void addParcel(Parcel parcel);
+    Parcel getParcelById(int parcelId);
+
+    // Assigning courier
+    void assignCourierToOrder(int orderId, int courierId);
+
+    // Parcel status update
+    void updateParcelStatus(int parcelId, String status);
+	void addcustomer(customer customer);
+}
