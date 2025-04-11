@@ -1,0 +1,154 @@
+package dao;
+
+import entity.Courier;
+import entity.Employee;
+import entity.Location;
+import entity.Orders;
+import entity.Parcel;
+import entity.Payment;
+import entity.customer;
+import Services.CourierService;
+import db.DBConnection;
+
+import java.sql.*;
+
+public class CourierServiceDb implements CourierService {
+
+    @Override
+    public void addCustomer(customer customer) {
+        String sql = "INSERT INTO Customer (cust_name, email, phone, address) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, customer.getCustName());
+            stmt.setString(2, customer.getEmail());
+            stmt.setString(3, customer.getPhone());
+            stmt.setString(4, customer.getAddress());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public customer getCustomerById(int custId) {
+        String sql = "SELECT * FROM Customer WHERE cust_id = ?";
+        customer customer = null;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, custId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                customer = new customer(
+                    rs.getInt("cust_id"),
+                    rs.getString("cust_name"),
+                    rs.getString("email"),
+                    rs.getString("phone"),
+                    rs.getString("address"),
+                    rs.getTimestamp("created_at")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return customer;
+    }
+
+	@Override
+	public void addCourier(Courier courier) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Courier getCourierById(int courierId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Employee getEmployeeById(int empId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addLocation(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Location getLocationById(int locationId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addPayment(Payment payment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Payment getPaymentById(int paymentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addOrder(Orders order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Orders getOrderById(int orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addParcel(Parcel parcel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Parcel getParcelById(int parcelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void assignCourierToOrder(int orderId, int courierId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateParcelStatus(int parcelId, String status) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addcustomer(customer customer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    // TODO: Implement rest of the methods like addCourier, addEmployee, etc.
+}
