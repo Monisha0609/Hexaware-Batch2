@@ -1,0 +1,19 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import dao.AssetManagementService;
+import dao.AssetManagementServiceImpl;
+import entity.Asset;
+
+public class AssetCreationTest {
+
+    @Test
+    public void testAssetCreatedSuccessfully() {
+        AssetManagementService service = new AssetManagementServiceImpl();
+        Asset asset = new Asset(0, "Projector", "Electronics", "SN1234", "2023-05-01", "Meeting Room", "in use", 1);
+
+        boolean result = service.addAsset(asset);
+        assertTrue(result, "Asset should be created successfully.");
+    }
+}
