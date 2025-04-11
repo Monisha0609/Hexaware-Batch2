@@ -1,0 +1,106 @@
+package entity;
+
+import java.sql.Timestamp;
+
+public class Courier {
+
+    private int courierId;
+    private String personName;
+    private String phone;
+    private String vehicleNumber;
+    private String status;
+    private String serviceType; 
+    private int serviceCost;   
+    private Timestamp createdAt;
+
+    // Default constructor
+    public Courier() {
+    }
+
+    // Parameterized constructor
+    public Courier(int courierId, String personName, String phone, String vehicleNumber, String status,
+                   String serviceType, int serviceCost, Timestamp createdAt) {
+        this.courierId = courierId;
+        this.personName = personName;
+        this.phone = phone;
+        this.vehicleNumber = vehicleNumber;
+        this.status = status;
+        this.serviceType = serviceType;
+        this.serviceCost = serviceCost;
+        this.createdAt = createdAt;
+    }
+
+    // Getters and Setters
+    public int getCourierId() {
+        return courierId;
+    }
+
+    public void setCourierId(int courierId) {
+        this.courierId = courierId;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public int getServiceCost() {
+        return serviceCost;
+    }
+
+    public void setServiceCost(int serviceCost) {
+        this.serviceCost = serviceCost;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    // toString method
+    @Override
+    public String toString() {
+        return "Courier [courierId=" + courierId + ", personName=" + personName + ", phone=" + phone
+                + ", vehicleNumber=" + vehicleNumber + ", status=" + status
+                + ", serviceType=" + serviceType + ", serviceCost=" + serviceCost
+                + ", createdAt=" + createdAt + "]";
+    }
+}
